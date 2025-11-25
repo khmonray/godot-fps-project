@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm03g3i24vdka"]
+
+[ext_resource type="PackedScene" uid="uid://bkqvfscdr2yv0" path="res://glb_assets/1-bed-apartment.glb" id="1_is2fm"]
+
+[node name="1-bed-apartment" instance=ExtResource("1_is2fm")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(5.978686, 2.6226832e-07, 0, -5.226733e-07, 3, 0, 0, 0, -6.95829, 0, 0, 0)

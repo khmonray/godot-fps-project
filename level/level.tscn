@@ -1,0 +1,57 @@
+[gd_scene load_steps=11 format=3 uid="uid://befrknuyf6vuf"]
+
+[ext_resource type="Texture2D" uid="uid://baf7kx7c5oyhl" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="1_7lnir"]
+[ext_resource type="PackedScene" uid="uid://d1tkiudsopk6v" path="res://player/player.tscn" id="2_5gx2l"]
+[ext_resource type="PackedScene" uid="uid://cv8xvr0k37bpc" path="res://scenery/apartments_4.tscn" id="3_qohg2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5gx2l"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_qohg2"]
+sky_material = SubResource("ProceduralSkyMaterial_5gx2l")
+
+[sub_resource type="Environment" id="Environment_vkbyq"]
+background_mode = 2
+sky = SubResource("Sky_qohg2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5gx2l"]
+albedo_texture = ExtResource("1_7lnir")
+uv1_scale = Vector3(6, 4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qohg2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vkbyq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ktfr2"]
+
+[node name="level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vkbyq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 1, 0, 0, 0, 15, -13.7886095, 0, 0)
+material_override = SubResource("StandardMaterial3D_5gx2l")
+mesh = SubResource("BoxMesh_qohg2")
+skeleton = NodePath("floor")
+
+[node name="floor" type="StaticBody3D" parent="MeshInstance3D"]
+physics_material_override = SubResource("PhysicsMaterial_vkbyq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/floor"]
+shape = SubResource("BoxShape3D_ktfr2")
+
+[node name="player" parent="." instance=ExtResource("2_5gx2l")]
+transform = Transform3D(0.013473536, 0, 0.9999092, 0, 1, 0, -0.9999092, 0, 0.013473536, -18.50634, 4.841332, 1.4319916)
+collision_mask = 1
+safe_margin = 0.1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.08150369, -0.5797337, 0.81071943, 0, 0.8134257, 0.5816689, -0.99667305, -0.047408164, 0.066297196, -12.6133, 11.557913, 13.203831)
+shadow_enabled = true
+
+[node name="apartments-4" parent="." instance=ExtResource("3_qohg2")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -23.759472, 3.995977, -3.5179312)
